@@ -109,4 +109,9 @@ class Articles
 
         return $this;
     }
+
+    public function __toString(): string
+    {
+        return $this->nameArticle . ' ' . $this->image . ' ' . $this->price . ' ' . $this->description . ' ' . $this->type . ' ' . $this->categories;
+    }
 }
