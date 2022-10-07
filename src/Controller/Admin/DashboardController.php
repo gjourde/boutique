@@ -9,6 +9,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 use App\Entity\User;
+use App\Entity\Articles;
+use App\Entity\Categories;
+
 
 class DashboardController extends AbstractDashboardController
 {
@@ -16,7 +19,7 @@ class DashboardController extends AbstractDashboardController
     public function index(): Response
     {
         $routeBuilder = $this->container->get(AdminUrlGenerator::class);
-        $url = $routeBuilder->setController(UserCrudController::class)->generateUrl();
+        $url = $routeBuilder->setController(ArticlesCrudController::class)->generateUrl();
 
         return $this->redirect($url);
 
@@ -34,7 +37,7 @@ class DashboardController extends AbstractDashboardController
         // Option 3. You can render some custom template to display a proper dashboard with widgets, etc.
         // (tip: it's easier if your template extends from @EasyAdmin/page/content.html.twig)
         //
-        // return $this->render('some/path/my-dashboard.html.twig');
+        //return $this->render('admin/dashboard.html.twig');
     }
 
     public function configureDashboard(): Dashboard
@@ -47,5 +50,7 @@ class DashboardController extends AbstractDashboardController
     {
         yield MenuItem::linktoRoute('Back to the website', 'fas fa-home', 'homepage');
         yield MenuItem::linkToCrud('User', 'fas fa-map-marker-alt', User::class);
+        yield MenuItem::linkToCrud('Articles', 'fas fa-map-marker-alt', Articles::class);
+        yield MenuItem::linkToCrud('Categories', 'fas fa-map-marker-alt', Categories::class);
     }
 }

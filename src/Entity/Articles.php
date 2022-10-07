@@ -28,10 +28,6 @@ class Articles
     #[ORM\Column(length: 20)]
     private ?string $type = null;
 
-    #[ORM\ManyToOne]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?categories $categories = null;
-
 
     public function getId(): ?int
     {
@@ -96,22 +92,5 @@ class Articles
         $this->type = $type;
 
         return $this;
-    }
-
-    public function getCategories(): ?categories
-    {
-        return $this->categories;
-    }
-
-    public function setCategories(?categories $categories): self
-    {
-        $this->categories = $categories;
-
-        return $this;
-    }
-
-    public function __toString(): string
-    {
-        return $this->nameArticle . ' ' . $this->image . ' ' . $this->price . ' ' . $this->description . ' ' . $this->type . ' ' . $this->categories;
     }
 }
