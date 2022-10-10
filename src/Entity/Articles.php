@@ -28,6 +28,10 @@ class Articles
     #[ORM\Column(length: 20)]
     private ?string $type = null;
 
+    #[ORM\ManyToOne(inversedBy: 'articles')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Categories $categories = null;
+
 
     public function getId(): ?int
     {
@@ -90,6 +94,18 @@ class Articles
     public function setType(string $type): self
     {
         $this->type = $type;
+
+        return $this;
+    }
+
+    public function getCategories(): ?Categories
+    {
+        return $this->categories;
+    }
+
+    public function setCategories(?Categories $categories): self
+    {
+        $this->categories = $categories;
 
         return $this;
     }
